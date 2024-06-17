@@ -1,0 +1,10 @@
+.App {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin-top: 48px;
+}
+
+.Title {
+  font-weight: normal;
+}

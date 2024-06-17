@@ -8,7 +8,7 @@ Once you are finished working, please email tech@ridetandem.co with your finishe
 
 **Project structure**
 
-Web - React TypeScript application accessible at http://localhost:8080. Generated with Vite (similar to Create React App). In the web folder, install the packages and run `yarn dev`  to run this.
+Web - React TypeScript application accessible at http://localhost:8080. Generated with Vite (similar to Create React App). In the web folder, install the packages and run `yarn dev` to run this.
 
 API - Node.js TypeScript application accessible at http://localhost:3000. Generated with Nest.JS framework (similar to Express.js). In the api folder, install the packages and run `yarn dev` to run this.
 
@@ -25,4 +25,24 @@ The app should have appropriate frontend unit tests.
 Additionally, what are some other ways you might want to improve or extend this application? This could include changes to the user experience, front-end and/or back-end. Feel free to leave comments or implement these changes if you have time.
 
 **Mockup**
-![Mockup](./mockup.png "Mockup")
+![Mockup](./mockup.png 'Mockup')
+
+## Potential improvements
+
+- General
+  - Add comments
+- Frontend
+  - Implement no results state
+  - Implement WebSockets instead of polling
+  - Show useful error state if bus times fetch fails
+  - Add tests for class names
+  - Create components or global styles for common text styles
+  - Use package or create reusable util for data fetching
+  - Use CSS package (Styled Components, Tailwind)
+  - Extract data fetching function(s) to separate file(s)
+  - Consolidate common types across frontend and backend into single source of truth e.g. package
+  - Improve typing for CSS modules for class name IntelliSense
+- Backend
+  - Validate search params
+  - Set CORS origins
+  - Fix ESLint errors

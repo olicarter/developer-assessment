@@ -1,31 +1,48 @@
 import { Injectable } from '@nestjs/common';
-import * as _ from 'lodash';
-
-export interface BusTime {
-  id: number;
-  busId: number;
-  destination: string;
-  minutesUntilArrival: number;
-}
+import { orderBy, random } from 'lodash';
+import { Order, SortBy, type BusTime } from './types';
 
 @Injectable()
 export class ApiService {
-  getBusTimes() {
-    return this.generateRandomBusTimes(5);
+  getBusTimes({
+    day,
+    order = Order.Asc,
+    sortBy = 'minutesUntilArrival',
+  }: {
+    day: number;
+    order?: Order;
+    sortBy?: SortBy<BusTime>;
+  }) {
+    const busTimes = this.generateRandomBusTimes(5);
+    const busTimesForDay = this.filterBusTimesForDay(busTimes, day);
+    return orderBy(busTimesForDay, sortBy, order);
   }
+
+  filterBusTimesForDay(busTimes: BusTime[], day: number) {
+    return busTimes.filter((busTime) => {
+      return !busTime.nonOperationalDays.includes(day);
+    });
+  }
+
   private generateRandomBusTimes(timesToGenerate: number) {
     let data: BusTime[] = [];
     for (let i = 0; i < timesToGenerate; i++) {
-      const { id: busId, destination } = this.getRandomBusRoute();
+      const {
+        id: busId,
+        destination,
+        nonOperationalDays,
+      } = this.getRandomBusRoute();
       data.push({
         id: i,
         busId,
         destination,
-        minutesUntilArrival: _.random(1, 15),
+        minutesUntilArrival: random(1, 15),
+        nonOperationalDays,
       });
     }
     return data;
   }
+
   private getRandomBusRoute() {
     const busRoutes = [
       { id: 176, destination: 'Newham Close', nonOperationalDays: [1, 3] },
@@ -36,6 +53,6 @@ export class ApiService {
         nonOperationalDays: [1, 5, 4],
       },
     ];
-    return busRoutes[_.random(0, busRoutes.length - 1)];
+    return busRoutes[random(0, busRoutes.length - 1)];
   }
 }
