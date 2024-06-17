@@ -6,7 +6,7 @@ export interface BusTimeCardProps extends BusTime {}
 export function BusTimeCard(props: BusTimeCardProps) {
   return (
     <div className={classes.Card}>
-      <header className={classes.CardHeader}>
+      <header>
         <h4 className={classes.CardTitle}>{props.busId}</h4>
       </header>
       <div className={classes.CardDetails}>
